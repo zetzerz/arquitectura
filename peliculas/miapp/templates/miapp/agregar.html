@@ -1,0 +1,100 @@
+{% extends 'miapp/base.html' %}
+
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  <title>Agregar Cliente</title>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %} 
+    <div class="row justify-content-center mt-2">
+        <div class="col">
+            <div class="card">
+                <div class="card-title">
+                    <h2 class="text-center mt-2">Ingresar Cliente</h2>
+                </div>
+                    <div class="card-body">
+                        <form action="" method="POST"  enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-4 mb-0">
+                                    <h2>Informacion Cliente</h2>
+                                    <br>    
+                                  {{ form.nombre|as_crispy_field }}
+                                  {{ form.numero_presupuesto|as_crispy_field }}
+                                  {{ form.proyecto|as_crispy_field }}
+                                  {{ form.direccion|as_crispy_field }}
+                                  {{ form.detalle|as_crispy_field }}
+                                  {{ form.mes|as_crispy_field }}
+                                  {{ form.año|as_crispy_field }}
+                                  {{ form.nombre_kardex|as_crispy_field }}
+                                  {{ form.detalle_estado|as_crispy_field }}
+                                  {{ form.proyecto_completado|as_crispy_field }}                  
+                                </div>
+
+                                <div class="form-group col-md-4 mb-0">
+                                    <h2>Ingresar Pagos</h2>
+                                    <br>
+                                   
+                                    {{ form.honorario|as_crispy_field }}
+                                    {{ form.honorario_dos|as_crispy_field }}
+                                    {{ form.pago_uno|as_crispy_field }}
+                                    {{ form.pago_dos|as_crispy_field }}
+                                    {{ form.pago_tres|as_crispy_field }}
+                                    {{ form.pago_cuatro|as_crispy_field }}
+                                    {{ form.pago_quinto|as_crispy_field }}
+                                    {{ form.pago_seis|as_crispy_field }}
+                                    {{ form.estado|as_crispy_field }}
+                                    {{ form.documento|as_crispy_field }}
+                                    {{ form.documento_presupuesto|as_crispy_field }}
+                                
+                                
+                                </div>
+
+
+                                <div class="form-group col-md-4 mb-0">
+                                    <h2>Sus Documentos</h2>
+                                    <br>
+                                {{ form.complete|as_crispy_field }}
+                                {{ form.file_uno|as_crispy_field }} 
+                                {{ form.file_dos|as_crispy_field }} 
+                                {{ form.file_tres|as_crispy_field }} 
+                                {{ form.file_cuatro|as_crispy_field }} 
+                                {{ form.file_cinco|as_crispy_field }} 
+                                {{ form.file_seis|as_crispy_field }} 
+                                {{ form.file_siete|as_crispy_field }} 
+                                {{ form.file_ocho|as_crispy_field }} 
+                                {{ form.file_nueve|as_crispy_field }} 
+                                {{ form.file_dies|as_crispy_field }} 
+                                {{ form.file_once|as_crispy_field }} 
+                                {{ form.file_doce|as_crispy_field }} 
+                                {{ form.file_trece|as_crispy_field }} 
+                                {{ form.file_catorce|as_crispy_field }} 
+                                {{ form.file_quince|as_crispy_field }} 
+                                </div>
+                                
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                        </form>
+                    </div>
+            </div>
+        </div>
+        </div>
+        {% else %}
+        <div class="container mt-3">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">USUARIO NO LOGEADO</h4>
+                <p>Este Acceso es restringido solo para usuarios que esten identificados</p>
+                <hr>
+                <p class="mb-0">Necesitas Logearte Para ver todas Las funcionabilidades del sitio</p>
+              </div>
+        </div>
+
+        {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'miapp/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+<main>
+  <div class="container-fluid mt-2">
+      <div class="card mb-4">
+          <div class="card-body">
+            <div class="container mt-3 ">
+              <div class="row">  
+                <div class="col-sm">
+                  <form method="get" class="form-label">
+                    <img src="{% static 'img/byd.jpg' %}" style="width: 100px;">
+
+                    {{ filter.form}}
+                    <input class="btn btn-secondary btn-sm" type="submit" />
+                  </form>
+                </div>
+            </div>
+          </div>
+      </div>
+      
+      <div class="card mb-4">
+          <div class="card-header">
+              <i class="fas fa-table mr-1"></i>
+              Agenda de Contactos B Y D
+          </div>
+          <br>
+          <a href="{% url 'agregar_contacto' %}" class="btn btn-danger btn-sm">AGREGAR CONTACTOS</a>
+          <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Sitio</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      {% for Agenda in filter.qs %}
+                       <tr>
+                         <td>{{ Agenda.nombre_agenda }}</td>
+                         <td>{{ Agenda.proyecto_agenda }}</td>
+                         <td>{{ Agenda.sitio }}</td>
+                         <td>{{ Agenda.telefono }}</td>
+                         <td>{{ Agenda.correo }}</td>
+                      
+                         
+                         <td>
+                           <a href="{% url 'editar_agenda' Agenda.pk %}"><i class="fas fa-edit"></i></a>
+                           {% if user.is_staff %}
+                           <a href="{% url 'eliminar_agenda' Agenda.pk %}"><i class="fas fa-trash-alt"></i></a>
+                           {% endif %}
+                         </td>
+                       </tr>
+                       {% endfor %}
+                     </tbody>
+                  </table>
+                </main>
+              </div>
+              {% else %}
+              <div class="container mt-3">
+                  <div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">USUARIO NO LOGEADO</h4>
+                      <p>Este Acceso es restringido solo para usuarios que esten identificados</p>
+                      <hr>
+                      <p class="mb-0">Necesitas Logearte Para ver todas Las funcionabilidades del sitio</p>
+                    </div>
+              </div>
+              {% endif %}
+            
+                <footer class="py-4 bg-light mt-auto">
+                  <div class="container-fluid">
+                      <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Sofware de Contol &copy; Byd Arquitectura 2021</div>
+                        <div>
+                            <a href="#">Uso solo para personal registrado</a>
+                            &middot;
+                            <a href="#">Terminos &amp; Condiciones</a>
+                        </div>
+                      </div>
+                  </div>
+              </footer>
+
+{% endblock %}

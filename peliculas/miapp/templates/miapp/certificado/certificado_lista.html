@@ -1,0 +1,74 @@
+{% extends 'miapp/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<div class="container mt-3">
+  <div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Tabla de Certicados
+    </div>
+    <a href="{% url 'agregar_certificado' %}" class="btn btn-danger btn-sm">Agregar Certificados</a>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                    <th scope="col">Nombre Certiicado</th>
+                    <th scope="col">Url</th>
+                    <th scope="col">Accion</th>
+                </tr>
+                
+              </thead>
+              <tbody>
+                {% for certificados in object_list %}
+                <tr>
+                  <td>{{ certificados.nombre_certificado }}</td>
+                  <td><a href="{{ certificados.link }}">Ver Pagina</a></td>
+                 
+                  <td>
+                    <a href="{% url 'editar_certificado' certificados.pk %}" class="btn btn-success btn-sm">editar</a>
+                    <a href="{% url 'eliminar_certificado' certificados.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                   </td>
+
+              </tbody>
+              {% endfor %}
+            </table>
+          </main>
+        </div>
+        {% else %}
+        <div class="container mt-3">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">USUARIO NO LOGEADO</h4>
+                <p>Este Acceso es restringido solo para usuarios que esten identificados</p>
+                <hr>
+                <p class="mb-0">Necesitas Logearte Para ver todas Las funcionabilidades del sitio</p>
+              </div>
+        </div>
+        {% endif %}
+          <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Sofware de Contol &copy; Byd Arquitectura 2021</div>
+                    <div>
+                        <a href="#">Uso solo para personal registrado</a>
+                        &middot;
+                        <a href="#">Terminos &amp; Condiciones</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</div>
+
+
+
+{% endblock %}
+

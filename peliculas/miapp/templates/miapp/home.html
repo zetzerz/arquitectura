@@ -1,0 +1,135 @@
+{% extends 'miapp/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<main>
+  <div class="container-fluid mt-2">
+      <div class="card mb-4">
+          <div class="card-body">
+            <div class="container mt-3 ">
+              <div class="row">  
+                <div class="col-sm">
+                  <form method="get" class="form-label">
+                    <img src="{% static 'img/byd.jpg' %}" style="width: 100px;">
+
+                    {{ filter.form}}
+                    <input class="btn btn-secondary btn-sm" type="submit" />
+                  </form>
+                </div>
+            </div>
+          </div>
+      </div>
+      
+      <div class="card mb-4">
+          <div class="card-header">
+              <i class="fas fa-table mr-1"></i>
+              Tabla De Clientes
+          </div>
+          <br>
+          <a href="{% url 'agregar' %}" class="btn btn-danger btn-sm">Agregar Cliente</a>
+          <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th scope="col">N °Presup</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Proyecto</th>
+                        <th scope="col">Mes</th>
+                        <th scope="col">Año</th>
+                        {% if user.is_staff %}
+                        <th scope="col">Honorario Arquitectura</th>
+                        <th scope="col">Ingeniria Topografia</th>
+                        {% endif %}
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      {% for dato_cliente in filter.qs %}
+                       <tr>
+                         <td>{{ dato_cliente.numero_presupuesto }}</td>
+                         <td>{{ dato_cliente.nombre }}</td>
+                         <td>{{ dato_cliente.proyecto }}</td>
+                         <td>{{ dato_cliente.mes }}</td>
+                         <td>{{ dato_cliente.año }}</td>
+                         {% if user.is_staff %}
+                         <td><button class="btn btn-success btn-sm" style="cursor: none;">${{ dato_cliente.honorario }}</button></td>
+                         <td><button class="btn btn-success btn-sm" style="cursor: none;">${{ dato_cliente.honorario_dos }}</button></td>
+
+                         {% endif %}
+                         
+                         {% if dato_cliente.estado == "PAGADO" %}
+                         <td style="color: green;"><strong>{{dato_cliente.estado}}</strong></td>
+                         {% elif dato_cliente.estado == "ABONO" %}
+                         <td style="color: rgb(255, 174, 0);"><strong>{{dato_cliente.estado}}</strong></td>
+                          {% else %}
+                         <td style="color: red;"><strong>{{dato_cliente.estado}}</strong></td>
+                       {% endif %}
+                         
+                         <td>
+                          <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Informacion">
+                            <a href="{% url 'detalle' dato_cliente.pk %}" style="width: 120px;"><i class="fas fa-eye"></i></a>
+                          </span>
+
+                          <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar Infomacion">
+                            <a href="{% url 'editar' dato_cliente.pk %}" style="width: 120px;"><i class="fas fa-edit"></i></a>
+                          </span>
+
+                          {% if user.is_staff %}
+                          <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar Cliente">
+                            <a href="{% url 'eliminar' dato_cliente.pk %}" style="width: 120px;"><i class="fas fa-trash-alt"></i></a>
+                          </span>
+                          {% endif %}
+
+                         </td>
+                       </tr>
+                       {% endfor %}
+                     </tbody>
+                  </table>
+                </main>
+              </div>
+              {% else %}
+              <div class="container mt-3">
+                  <div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">USUARIO NO LOGEADO</h4>
+                      <p>Este Acceso es restringido solo para usuarios que esten identificados</p>
+                      <hr>
+                      <p class="mb-0">Necesitas Logearte Para ver todas Las funcionabilidades del sitio</p>
+                    </div>
+              </div>
+              {% endif %}
+            
+                <footer class="py-4 bg-light mt-auto">
+                  <div class="container-fluid">
+                      <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Sofware de Contol &copy; Byd Arquitectura 2021</div>
+                        <div>
+                            <a href="#">Uso solo para personal registrado</a>
+                            &middot;
+                            <a href="#">Terminos &amp; Condiciones</a>
+                        </div>
+                      </div>
+                  </div>
+              </footer>
+
+{% endblock %}
+
+
+{% block JavaScript %}
+<script>
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+
+{% endblock %}

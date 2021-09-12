@@ -1,0 +1,122 @@
+jesus.navarrete03@inacapmail.cl
+
+
+pagina cpanel
+
+
+toyboxma
+7x6Wj[8iZ)RW3f
+
+pago
+
+jnavarrete2626
+jesus434336
+
+wordpress
+
+zetzer
+jesus434336
+jesus059
+
+
+https://www.w3schools.com/howto/howto_js_topnav.asp
+
+
+algebra
+
+andres.alday02@inacapmail.cl
+---------------------------
+
+pagina de facebook:
+https://www.facebook.com/Toybox-Max-100223772085473
+
+visitanos para mas :
+https://toyboxmax.cl/
+
+siguenos en instagram:
+https://www.instagram.com/toyboxmax/
+
+tienda facebook
+https://www.facebook.com/Toybox-Max-100223772085473/shop/?ref_code=mini_shop_page_card_cta&ref_surface=page
+
+
+
+cuenta rut
+banco estado
+nombre: jesus navarrete
+rut: 18.263.005-5
+
+introduccion ala programacion
+Evaluación         1            19/04
+Evaluación         2             03/05
+Evaluación         3             08/06
+Evaluación         4             12/07
+
+
+
+Algoritmo sin_titulo
+leer rut
+dv=SubCadena(rut,Longitud(rut),Longitud(rut))
+rut= SubCadena(rut,1,Longitud(rut)-2)
+l=Longitud(rut)
+ll=l
+c=2
+Mientras ll<>0 Hacer
+s=s+ ConvertirANumero(SubCadena(rut,l,ll))*c
+ll=ll-1
+l=l-1
+c=c+1
+si c=8 Entonces
+c=2
+FinSi
+
+Fin Mientras
+Escribir 11 -(s mod 11)
+FinAlgoritmo
+
+
+
+
+
+Algoritmo sin_titulo
+Leer pa
+l=Longitud(pa)
+
+Mientras l<>0 Hacer
+Si SubCadena(pa,l,l)<>" " Entonces
+t=t +SubCadena(pa,l,l)
+Fin Si
+l=l-1
+Fin Mientras
+l=Longitud(pa)
+i=1
+Mientras i<=l Hacer
+Si SubCadena(pa,i,i)<>" " Entonces
+tt=tt +SubCadena(pa,i,i)
+Fin Si
+i=i+1
+Fin Mientras
+Si t=tt Entonces
+Escribir "Palindromo"
+SiNo
+Escribir "No Palindromo"
+Fin Si
+
+FinAlgoritmo
+
+
+
+
+
+
+class ArticleView(DetailView):
+    model = Post
+    template_name = 'postear/articulo.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super (ArticleView, self).get_context_data(*args, **kwargs)
+        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+        context["total_likes"] = total_likes
+        return context
+   

@@ -1,0 +1,141 @@
+{% extends 'miapp/base.html' %}
+
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+<div class="container-fluid mt-3">
+  <div class="card">
+<div class="card-body">
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-9">
+      
+      <!-- User profile -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="panel-title"></h4>
+        </div>
+        <div class="panel-body">
+          <div class="profile__avatar">
+            <img src="{% static 'img/byd.jpg' %}" style="width: 100px;">
+          </div>
+          <div class="profile__header">
+            <p class="text-muted">
+                En esta seccion Podras ver todos los archivos adjuntados de tus clientes
+            </p>
+            
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- User info -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="panel-title">Todos Los Archivos Adjuntados</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table profile__table">
+            <tbody>
+           
+              <tr>
+                <tr>
+                    <th><strong>Nombre Cliente</strong></th>
+                    <td>{{ dato_cliente.nombre }}</td>
+
+    
+                    <td>Documentos : <strong">
+                      {% if dato_cliente.complete == "COMPLETADOS" %}
+                      <td style="color: green;"><strong>{{dato_cliente.complete}}</strong></td>
+                      {% elif dato_cliente.complete == "ALGUNOS DOC" %}
+                      <td style="color: rgb(255, 166, 0);"><strong>{{dato_cliente.complete}}</strong></td>
+                       {% else %}
+                      <td style="color: red;"><strong>{{dato_cliente.complete}}</strong></td>
+                    </strong></td>
+                    {% endif %}
+
+
+                    
+                  </tr>
+                <tr>
+                  <th><strong>Escritura</strong></th>
+                  {% if dato_cliente.file_uno %}
+                  <td><a href="{{ dato_cliente.file_uno.url }}">Escritura</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Fotocopia Carnet</strong></th>
+                  {% if dato_cliente.file_dos %}
+                  <td><a href="{{ dato_cliente.file_dos.url }}">Fotocopia Carnet</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Comprobante de Agua</strong></th>
+                  {% if dato_cliente.file_tres %}
+                  <td><a href="{{ dato_cliente.file_tres.url }}">Comprobante de Agua</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Poder Simple</strong></th>
+                  {% if dato_cliente.file_cuatro %}
+                  <td><a href="{{ dato_cliente.file_cuatro.url }}">Poder Simple</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Avaluo Detallado</strong></th>
+                  {% if dato_cliente.file_cinco %}
+                  <td><a href="{{ dato_cliente.file_cinco.url }}">Avaluo Detallado</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Dominio Vigente</strong></th>
+                  {% if dato_cliente.file_seis %}
+                  <td><a href="{{ dato_cliente.file_seis.url }}">Dominio Vigente</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Certificado Informe Previo</strong></th>
+                  {% if dato_cliente.file_siete %}
+                  <td><a href="{{ dato_cliente.file_siete.url }}">Certificado Informe Previo</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Utilidad Publica</strong></th>
+                  {% if dato_cliente.file_ocho %}
+                  <td><a href="{{ dato_cliente.file_ocho.url }}">Utilidad Publica</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Conjunto Habitacional</strong></th>
+                  {% if dato_cliente.file_nueve %}
+                  <td><a href="{{ dato_cliente.file_nueve.url }}">Conjunto Habitacional</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Exp.Propiedad</strong></th>
+                  {% if dato_cliente.file_dies %}
+                  <td><a href="{{ dato_cliente.file_dies.url }}">Exp.Propiedad</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Informe Tecnico</strong></th>
+                  {% if dato_cliente.file_once %}
+                  <td><a href="{{ dato_cliente.file_once.url }}">Informe Tecnico</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Factibilidad</strong></th>
+                  {% if dato_cliente.file_doce %}
+                  <td><a href="{{ dato_cliente.file_doce.url }}">Factibilidad</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Solicitud</strong></th>
+                  {% if dato_cliente.file_trece %}
+                  <td><a href="{{ dato_cliente.file_trece.url }}">Solicitud</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>I.N.E</strong></th>
+                  {% if dato_cliente.file_catorce %}
+                  <td><a href="{{ dato_cliente.file_catorce.url }}">I.N.E</a></td>
+                  {% endif %}
+                  </tr>
+                  <th><strong>Patente Profecionalte</strong></th>
+                  {% if dato_cliente.file_quince %}
+                  <td><a href="{{ dato_cliente.file_quince.url }}">Patente Profecional</a></td>
+                  {% endif %}
+                  </tr>
+            
+{% endblock %}

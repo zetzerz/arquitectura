@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+{% block title %}
+
+{% endblock %}
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  
+
+  <title>SB Admin - Dashboard</title>
+  <!-- Custom fonts for this template-->
+  <script src="https://kit.fontawesome.com/fa2fd83816.js" crossorigin="anonymous"></script>
+  <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="{% static '/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static '/css/sb-admin.css' %}" rel="stylesheet">
+ {% block css %}
+ {% endblock %}
+  
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" style="text-shadow: black;">
+        <strong>B Y D ARQUITECTURA</strong>
+      </div>
+      
+      <div class="list-group list-group-flush">
+        <a href="{% url 'home' %}" class="list-group-item list-group-item-action bg-light">Panel De Control</a>
+        <a href="{% url 'pago' %}" class="list-group-item list-group-item-action bg-light">Ver Pagos</a>
+        <a href="{% url 'estado_proyecto' %}" class="list-group-item list-group-item-action bg-light">Kardex y Estado Proyecto</a>
+        <a href="{% url 'detalle_archivos' %}" class="list-group-item list-group-item-action bg-light">Archivos Cliente</a>
+        <a href="{% url 'formato_lista' %}" class="list-group-item list-group-item-action bg-light">Formatos</a>
+        <a href="{% url 'certificado_lista' %}" class="list-group-item list-group-item-action bg-light">Solicitar Certificados</a>
+        <a href="{% url 'agenda_contacto' %}" class="list-group-item list-group-item-action bg-light">Agenda de Contactos</a>
+
+
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Abrir Menu</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+       
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Usuario {{ user }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesion</a>
+            </li>
+            {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </nav>
+
+
+      <div class="container-fluid">
+        {% block content %}
+
+        
+        {% endblock %}
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static '/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Page level plugin JavaScript-->
+
+<script src="{% static '/vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static '/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static '/js/sb-admin.min.js' %}"></script>
+<script src="{% static '/js/confirmacion.js' %}"></script>
+
+
+<!-- Demo scripts for this page-->
+<script src="{% static '/js/demo/datatables-demo.js' %}"></script>
+<script src="{% static '/js/demo/chart-area-demo.js' %}"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
+
+{% block JavaScript %}
+  
+{% endblock %}
+
+</body>
+
+</html>
